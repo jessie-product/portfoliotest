@@ -1,65 +1,102 @@
-import Image from "next/image";
+import Link from "next/link";
+import {
+  caseStudies,
+  designerProfile,
+  portfolioPrinciples,
+} from "@/content/portfolio";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="portfolio-home">
+      <header className="top-nav">
+        <p className="brand-mark">{designerProfile.name}</p>
+        <nav aria-label="Primary">
+          <ul>
+            <li>
+              <a href="#work">Work</a>
+            </li>
+            <li>
+              <a href="#approach">Approach</a>
+            </li>
+            <li>
+              <a href="#contact">Contact</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+
+      <section className="hero" id="top">
+        <p className="eyebrow reveal">{designerProfile.title}</p>
+        <h1 className="reveal reveal-delay-1">{designerProfile.tagline}</h1>
+        <p className="hero-copy reveal reveal-delay-2">{designerProfile.intro}</p>
+
+        <div className="hero-meta reveal reveal-delay-3">
+          <p>
+            <span>Location</span>
+            {designerProfile.location}
+          </p>
+          <p>
+            <span>Focus</span>
+            End-to-end product design, activation, and platform UX
+          </p>
+          <p>
+            <span>Now</span>
+            Open to mid-level product design opportunities
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      <section className="selected-work" id="work" aria-labelledby="selected-work-title">
+        <div className="section-intro">
+          <p className="eyebrow">Selected Case Studies</p>
+          <h2 id="selected-work-title">Projects built for scale, clarity, and measurable outcomes.</h2>
         </div>
-      </main>
-    </div>
+
+        <div className="work-list">
+          {caseStudies.map((study) => (
+            <article key={study.slug} className="work-item">
+              <p className="work-meta">
+                <span>{study.category}</span>
+                <span>{study.year}</span>
+              </p>
+              <h3>{study.title}</h3>
+              <p>{study.summary}</p>
+              <ul>
+                {study.impact.map((metric) => (
+                  <li key={metric}>{metric}</li>
+                ))}
+              </ul>
+              <Link href={`/work/${study.slug}`}>Read Case Study</Link>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="approach" id="approach" aria-labelledby="approach-title">
+        <div className="section-intro">
+          <p className="eyebrow">How I Work</p>
+          <h2 id="approach-title">Built for cross-functional teams that move fast without losing quality.</h2>
+        </div>
+
+        <div className="principles-grid">
+          {portfolioPrinciples.map((principle) => (
+            <article key={principle.title}>
+              <h3>{principle.title}</h3>
+              <p>{principle.detail}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="contact" id="contact" aria-labelledby="contact-title">
+        <p className="eyebrow">Contact</p>
+        <h2 id="contact-title">Let&apos;s design products people can understand in seconds.</h2>
+        <p>
+          If you are hiring for product design roles, I&apos;d love to share deeper case
+          studies and walkthroughs.
+        </p>
+        <a href={`mailto:${designerProfile.email}`}>{designerProfile.email}</a>
+      </section>
+    </main>
   );
 }
