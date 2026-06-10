@@ -1,9 +1,27 @@
+import Image from "next/image";
 import Link from "next/link";
-import {
-  caseStudies,
-  designerProfile,
-  portfolioPrinciples,
-} from "@/content/portfolio";
+import { behanceProjects } from "@/content/behance-projects";
+import { customProjects } from "@/content/custom-projects";
+import { designerProfile, portfolioPrinciples } from "@/content/portfolio";
+
+const featuredProjects = [
+  ...customProjects.map((project) => ({
+    slug: project.slug,
+    title: project.title,
+    image: project.heroImage,
+    meta: "Product Design",
+    count: project.year,
+    description: project.subtitle,
+  })),
+  ...behanceProjects.map((project) => ({
+    slug: project.slug,
+    title: project.title,
+    image: project.images[0] ?? project.coverImage,
+    meta: "Behance Import",
+    count: `${project.moduleCount} images`,
+    description: "Imported from Behance with full inner-page image gallery.",
+  })),
+];
 
 export default function Home() {
   return (
@@ -19,6 +37,9 @@ export default function Home() {
               <a href="#approach">Approach</a>
             </li>
             <li>
+              <a href="/resume">Resume</a>
+            </li>
+            <li>
               <a href="#contact">Contact</a>
             </li>
           </ul>
@@ -26,47 +47,62 @@ export default function Home() {
       </header>
 
       <section className="hero" id="top">
-        <p className="eyebrow reveal">{designerProfile.title}</p>
-        <h1 className="reveal reveal-delay-1">{designerProfile.tagline}</h1>
-        <p className="hero-copy reveal reveal-delay-2">{designerProfile.intro}</p>
+        <div className="hero-content">
+          <div className="hero-title-row reveal">
+            <Image
+              src="/profile.jpg"
+              alt="Jessie Kuo profile photo"
+              width={96}
+              height={96}
+              className="profile-photo"
+              priority
+            />
+            <h1>product designer.</h1>
+          </div>
 
-        <div className="hero-meta reveal reveal-delay-3">
-          <p>
-            <span>Location</span>
-            {designerProfile.location}
+          <p className="hero-copy reveal reveal-delay-1">
+            Jessie designs thoughtful digital experiences across product,
+            interface, and service journeys. Her work is grounded in clarity,
+            empathy, and practical iteration.
           </p>
-          <p>
-            <span>Focus</span>
-            End-to-end product design, activation, and platform UX
-          </p>
-          <p>
-            <span>Now</span>
-            Open to mid-level product design opportunities
+
+          <p className="hero-role reveal reveal-delay-2">
+            Product Designer / UXUI Designer
           </p>
         </div>
+
+        <a href="#work" className="scroll-arrow reveal reveal-delay-3" aria-label="Scroll to work">
+          <span />
+        </a>
       </section>
 
       <section className="selected-work" id="work" aria-labelledby="selected-work-title">
         <div className="section-intro">
-          <p className="eyebrow">Selected Case Studies</p>
-          <h2 id="selected-work-title">Projects built for scale, clarity, and measurable outcomes.</h2>
+          <p className="eyebrow">Work</p>
+          <h2 id="selected-work-title">Projects</h2>
         </div>
 
         <div className="work-list">
-          {caseStudies.map((study) => (
-            <article key={study.slug} className="work-item">
+          {featuredProjects.map((project) => (
+            <article key={project.slug} className="work-item">
+              <Link href={`/work/${project.slug}`} className="work-cover">
+                <Image
+                  src={project.image}
+                  alt={`${project.title} cover`}
+                  width={1200}
+                  height={900}
+                  sizes="(max-width: 960px) 100vw, 50vw"
+                  quality={100}
+                  unoptimized
+                />
+              </Link>
               <p className="work-meta">
-                <span>{study.category}</span>
-                <span>{study.year}</span>
+                <span>{project.meta}</span>
+                <span>{project.count}</span>
               </p>
-              <h3>{study.title}</h3>
-              <p>{study.summary}</p>
-              <ul>
-                {study.impact.map((metric) => (
-                  <li key={metric}>{metric}</li>
-                ))}
-              </ul>
-              <Link href={`/work/${study.slug}`}>Read Case Study</Link>
+              <h3>{project.title}</h3>
+              <p>{project.description}</p>
+              <Link href={`/work/${project.slug}`}>Read Case Study</Link>
             </article>
           ))}
         </div>

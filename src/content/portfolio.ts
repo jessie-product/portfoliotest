@@ -19,163 +19,271 @@ export const designerProfile = {
   name: "Jessie Kuo",
   title: "Product Designer",
   tagline:
-    "Designing high-clarity product experiences for complex systems and high-growth teams.",
+    "Designing high-clarity product experiences from social, commerce, and service workflows.",
   location: "Taipei / Remote",
   email: "hello@jessiekuo.design",
   intro:
-    "I help product teams turn ambiguous opportunities into measurable outcomes by combining systems thinking, fast prototyping, and rigorous user validation.",
+    "I focus on turning complex user flows into intuitive end-to-end product experiences through research, interaction design, and iterative prototyping.",
 };
 
 export const portfolioPrinciples = [
   {
-    title: "Impact First",
+    title: "User Clarity",
     detail:
-      "Every project is anchored by a business and user metric, not visual polish alone.",
+      "I prioritize comprehension and decision confidence, so users understand what to do next at every step.",
   },
   {
-    title: "Narrative Clarity",
+    title: "Flow-Driven Design",
     detail:
-      "Case studies are structured for rapid scanning: context, decisions, trade-offs, and outcomes.",
+      "I design around key journeys first, then scale patterns into cohesive systems.",
   },
   {
-    title: "Cross-Functional Leadership",
+    title: "Practical Iteration",
     detail:
-      "I work closely with PM, engineering, and data stakeholders to de-risk delivery and align teams.",
+      "I collaborate with product and engineering to validate quickly and ship improvements in realistic increments.",
   },
 ];
 
 export const caseStudies: CaseStudy[] = [
   {
-    slug: "onboarding-rebuild",
-    title: "Rebuilding Onboarding for a B2B Workflow Product",
-    category: "Growth / Activation",
-    year: "2025",
-    duration: "4 months",
-    role: "Lead Product Designer",
-    team: "1 PM, 5 engineers, 1 data analyst",
+    slug: "cremecard-social-media-app",
+    title: "CremeCard | Social Media App",
+    category: "Social Product / Mobile UX",
+    year: "2024",
+    duration: "Personal project",
+    role: "Product Designer",
+    team: "Solo",
     summary:
-      "Redesigned the first-session onboarding flow to reduce setup friction and improve activation quality.",
-    impact: [
-      "+18% week-1 activation",
-      "-27% setup drop-off",
-      "+11 NPS points for new users",
-    ],
+      "Designed a social app concept focused on profile expression and lightweight user interaction flows.",
+    impact: ["114 views on Behance", "2 appreciations", "Mobile-first interaction concept"],
     problem:
-      "New users had to configure too many settings before seeing value. Teams were abandoning onboarding before completing core setup.",
+      "Social product interfaces often overwhelm users with dense actions and unclear hierarchy on first use.",
     constraints: [
-      "Legacy information architecture tied to old pricing tiers",
-      "Single sprint window for engineering migration",
-      "Must preserve enterprise compliance requirements",
+      "No engineering team in early concept stage",
+      "Needed clear hierarchy for small mobile screens",
+      "Had to balance visual personality with usability",
     ],
     approach: [
       {
-        title: "Diagnose",
+        title: "Frame",
         detail:
-          "Mapped first-session funnel and interviewed 12 recently churned admins to identify confidence and motivation gaps.",
+          "Defined core user actions and mapped key moments for browsing, posting, and profile interaction.",
       },
       {
-        title: "Rescope",
+        title: "Design",
         detail:
-          "Reduced initial setup from 9 required decisions to 3 by moving advanced options into progressive disclosure.",
+          "Built mobile UI directions with strong visual hierarchy, legible typography, and simplified action points.",
       },
       {
-        title: "Validate",
+        title: "Refine",
         detail:
-          "Ran usability testing and staged release experiments with PM + analytics to measure quality of activation, not just completion.",
+          "Iterated layout rhythm and component consistency to keep the interface expressive but easy to scan.",
       },
     ],
     outcome:
-      "Activation improved without increasing support tickets. The framework became a reusable onboarding pattern for two adjacent product lines.",
+      "The project became a focused portfolio piece demonstrating end-to-end social product UI thinking.",
     reflection:
-      "A key learning was that reducing visible complexity increased user trust more than adding explanatory copy.",
+      "The best visual systems in social apps still need strict interaction clarity to remain usable.",
   },
   {
-    slug: "insights-dashboard",
-    title: "Designing an Insights Dashboard for Multi-Region Operators",
-    category: "Data Product / Decision Support",
-    year: "2024",
-    duration: "5 months",
-    role: "Senior Product Designer",
-    team: "2 PMs, 7 engineers, 1 researcher",
+    slug: "pet-backers-app-uiux-design",
+    title: "Pet Backers App | UIUX Design",
+    category: "Consumer App / Service UX",
+    year: "2023",
+    duration: "Personal project",
+    role: "Product Designer",
+    team: "Solo",
     summary:
-      "Created a decision-first analytics surface that helped operations teams detect regional anomalies faster.",
-    impact: [
-      "-32% time-to-diagnose incidents",
-      "+24% weekly dashboard adoption",
-      "3 legacy views consolidated into 1 workspace",
-    ],
+      "Designed a pet-focused app experience to support user trust and task completion in care-related workflows.",
+    impact: ["131 views on Behance", "1 appreciation", "End-to-end app flow prototype"],
     problem:
-      "Operators had fragmented reporting tools and no shared source of truth for investigating performance shifts.",
+      "Pet service users need emotional reassurance and fast action, but many apps create friction in key moments.",
     constraints: [
-      "High data latency variance across regions",
-      "Complex permissions model by market",
-      "Needed parity between desktop and field tablet usage",
+      "Needed to support first-time and repeat users",
+      "Had to communicate trust signals in UI",
+      "Limited scope and timeline for concept delivery",
     ],
     approach: [
       {
-        title: "Align",
+        title: "Research",
         detail:
-          "Facilitated cross-functional workshops to define top five decisions users needed to make each day.",
+          "Reviewed comparable pet and service apps to identify trust, booking, and communication UX patterns.",
       },
       {
         title: "Structure",
         detail:
-          "Organized the UI around decision workflows: detect, compare, isolate, and action instead of chart-type navigation.",
+          "Organized screens around practical user tasks and progressive information disclosure.",
       },
       {
-        title: "Ship",
+        title: "Prototype",
         detail:
-          "Partnered with engineering to stage rendering performance budgets and ensure interactions stayed responsive under heavy data states.",
+          "Created screen flows and UI states that balanced emotional tone with operational clarity.",
       },
     ],
     outcome:
-      "Operations leadership adopted the dashboard as the default weekly review tool, replacing slide-based reporting in regional meetings.",
+      "The concept demonstrates ability to design service-oriented consumer journeys with clear task progression.",
     reflection:
-      "The biggest gain came from reducing interpretation effort, not adding more visualizations.",
+      "Trust cues should be integrated into flow structure, not treated as decorative UI elements.",
   },
   {
-    slug: "design-system-scaling",
-    title: "Scaling a Design System Across 4 Product Pods",
-    category: "Platform / Design Operations",
+    slug: "amazon-product-research",
+    title: "Amazon Product Research",
+    category: "E-commerce / Product Strategy",
     year: "2023",
-    duration: "6 months",
+    duration: "Research project",
     role: "Product Designer",
-    team: "Design lead, 4 designers, 12 engineers",
+    team: "Solo",
     summary:
-      "Established governance and component standards to accelerate shipping while improving interface consistency.",
-    impact: [
-      "-21% average feature UI implementation time",
-      "86% component adoption in 2 quarters",
-      "Accessibility issues reduced by 40%",
-    ],
+      "Analyzed Amazon product experience patterns to identify opportunities for improved discovery and comparison UX.",
+    impact: ["114 views on Behance", "1 appreciation", "Research-to-design framing"],
     problem:
-      "Teams were rebuilding similar UI patterns repeatedly, causing inconsistent experiences and slower release cycles.",
+      "Large e-commerce environments can create decision overload and reduce confidence during product comparison.",
     constraints: [
-      "Different tech stacks across pods",
-      "No dedicated design system squad",
-      "Had to migrate incrementally without freezing product work",
+      "Research outputs had to stay concise and actionable",
+      "Needed to connect UX observations to product decisions",
+      "No direct access to proprietary user metrics",
     ],
     approach: [
       {
         title: "Audit",
         detail:
-          "Cataloged duplicate UI patterns and built a prioritization matrix based on usage frequency and implementation cost.",
+          "Reviewed key user paths including search, listing, and product detail comparison moments.",
       },
       {
-        title: "Enable",
+        title: "Synthesize",
         detail:
-          "Introduced practical adoption guides, design reviews, and office hours to lower migration friction.",
+          "Mapped friction points and translated findings into potential UX improvement principles.",
       },
       {
-        title: "Govern",
+        title: "Recommend",
         detail:
-          "Created lightweight contribution criteria with engineering partners so teams could evolve the system without bottlenecks.",
+          "Proposed interface and content hierarchy improvements to reduce cognitive load in decision stages.",
       },
     ],
     outcome:
-      "The system shifted from a static Figma library to a product-level operating model shared by design and engineering.",
+      "The project highlights product thinking and research synthesis skills beyond pure visual execution.",
     reflection:
-      "Consistency scales when contribution is easier than reinvention.",
+      "Strong research artifacts are most useful when they directly inform prioritization and design trade-offs.",
+  },
+  {
+    slug: "open-app-uiux-redesign-project",
+    title: "Open App | UIUX redesign project",
+    category: "Redesign / Product Improvement",
+    year: "2023",
+    duration: "Personal redesign",
+    role: "Product Designer",
+    team: "Solo",
+    summary:
+      "Redesigned an existing app experience to improve navigation clarity and reduce interaction friction.",
+    impact: ["135 views on Behance", "0 appreciations", "End-to-end redesign concept"],
+    problem:
+      "The original app structure made it hard for users to discover high-frequency actions quickly.",
+    constraints: [
+      "Redesign needed to respect existing mental models",
+      "Had to modernize UI without adding complexity",
+      "Project scope was limited to key journeys",
+    ],
+    approach: [
+      {
+        title: "Evaluate",
+        detail:
+          "Assessed legacy IA and interaction patterns to identify navigation and content hierarchy weaknesses.",
+      },
+      {
+        title: "Redesign",
+        detail:
+          "Reorganized layouts and action architecture for faster scanning and clearer path-to-action.",
+      },
+      {
+        title: "Validate",
+        detail:
+          "Reviewed task flows against usability heuristics and refined details for consistency.",
+      },
+    ],
+    outcome:
+      "This case shows practical redesign capability and ability to reframe existing products with clearer UX logic.",
+    reflection:
+      "Successful redesigns focus on removing ambiguity before adding new features.",
+  },
+  {
+    slug: "smart-brewing-app-uiux-personal-project",
+    title: "Smart brewing app | UIUX | personal project",
+    category: "IoT Companion App / Mobile UX",
+    year: "2023",
+    duration: "Personal project",
+    role: "Product Designer",
+    team: "Solo",
+    summary:
+      "Designed a companion app concept for smart brewing, emphasizing guided setup and control readability.",
+    impact: ["130 views on Behance", "0 appreciations", "Connected-device UX exploration"],
+    problem:
+      "Companion apps for physical devices often struggle with clear status feedback and setup progression.",
+    constraints: [
+      "Needed to represent device state clearly in limited space",
+      "Had to balance novice guidance with advanced controls",
+      "No hardware integration during concept phase",
+    ],
+    approach: [
+      {
+        title: "Map",
+        detail:
+          "Defined user journey from first-time pairing to daily brewing routines.",
+      },
+      {
+        title: "Design",
+        detail:
+          "Built screens for setup, control, and status with emphasis on readability and confidence.",
+      },
+      {
+        title: "Iterate",
+        detail:
+          "Adjusted interaction density and terminology to make controls feel more intuitive.",
+      },
+    ],
+    outcome:
+      "The project demonstrates UX thinking for connected experiences and behavior-based interface structuring.",
+    reflection:
+      "Clear system status communication is critical for trust in IoT-related mobile experiences.",
+  },
+  {
+    slug: "dl-speaker-product-design",
+    title: "D&L speaker | product design",
+    category: "Industrial Design / Product Concept",
+    year: "2022",
+    duration: "Personal project",
+    role: "Product Designer",
+    team: "Solo",
+    summary:
+      "Developed a speaker concept combining form exploration with user-oriented interaction considerations.",
+    impact: ["125 views on Behance", "9 appreciations", "Highest engagement among listed projects"],
+    problem:
+      "Audio product concepts need both strong visual identity and intuitive physical interaction points.",
+    constraints: [
+      "Needed to keep form language manufacturable",
+      "Had to align aesthetics with usability intent",
+      "Project completed without hardware prototyping",
+    ],
+    approach: [
+      {
+        title: "Explore",
+        detail:
+          "Generated multiple form and material directions to define a cohesive product identity.",
+      },
+      {
+        title: "Select",
+        detail:
+          "Narrowed concepts based on balance between usability, proportions, and visual coherence.",
+      },
+      {
+        title: "Present",
+        detail:
+          "Built final renders and storytelling assets to communicate functional and aesthetic decisions.",
+      },
+    ],
+    outcome:
+      "This piece broadens the portfolio by showing physical product sensibility alongside digital UX work.",
+    reflection:
+      "Physical interaction design sharpens precision in digital interaction thinking.",
   },
 ];
 

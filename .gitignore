@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# raw imported page caches with third-party embedded tokens
+behance_*.html
+data/*.html

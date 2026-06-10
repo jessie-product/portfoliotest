@@ -1,39 +1,166 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { caseStudies, getCaseStudyBySlug } from "@/content/portfolio";
+import {
+  behanceProjects,
+  getBehanceProjectBySlug,
+} from "@/content/behance-projects";
+import {
+  customProjects,
+  getCustomProjectBySlug,
+} from "@/content/custom-projects";
 
 type CaseStudyPageProps = {
   params: Promise<{ slug: string }>;
 };
 
 export function generateStaticParams() {
-  return caseStudies.map((study) => ({ slug: study.slug }));
+  return [...customProjects, ...behanceProjects].map((project) => ({
+    slug: project.slug,
+  }));
 }
 
 export async function generateMetadata({
   params,
 }: CaseStudyPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const caseStudy = getCaseStudyBySlug(slug);
+  const customProject = getCustomProjectBySlug(slug);
 
-  if (!caseStudy) {
+  if (customProject) {
     return {
-      title: "Case Study Not Found",
+      title: `${customProject.title} | Jessie Kuo`,
+      description: customProject.subtitle,
     };
   }
 
+  const project = getBehanceProjectBySlug(slug);
+
+  if (!project) {
+    return { title: "Project Not Found" };
+  }
+
   return {
-    title: `${caseStudy.title} | Jessie Kuo`,
-    description: caseStudy.summary,
+    title: `${project.title} | Jessie Kuo`,
+    description: `Imported Behance project with ${project.moduleCount} gallery images.`,
   };
 }
 
 export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   const { slug } = await params;
-  const caseStudy = getCaseStudyBySlug(slug);
+  const customProject = getCustomProjectBySlug(slug);
 
-  if (!caseStudy) {
+  if (customProject) {
+    return (
+      <main className="case-study-page">
+        <Link href="/" className="back-link case-study-back">
+          Back to Portfolio
+        </Link>
+
+        <section className="case-study-hero" aria-label={`${customProject.title} hero image`}>
+          <Image
+            src={customProject.heroImage}
+            alt={`${customProject.title} hero`}
+            width={2400}
+            height={1200}
+            quality={100}
+            priority
+            unoptimized
+          />
+        </section>
+
+        <article className="case-study-shell">
+          <header className="case-study-intro">
+            <div>
+              <ul className="case-study-tags" aria-label="Project tags">
+                {customProject.tags.map((tag) => (
+                  <li key={tag}>{tag}</li>
+                ))}
+              </ul>
+              <h1>{customProject.title}</h1>
+              <p>{customProject.subtitle}</p>
+            </div>
+          </header>
+
+          <dl className="case-study-meta">
+            {customProject.meta.map((item) => (
+              <div key={item.label}>
+                <dt>{item.label}</dt>
+                <dd>{item.value}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <section className="case-study-short-story" aria-labelledby="short-story-title">
+            <p className="case-study-short-eyebrow">
+              {customProject.shortStory.eyebrow}
+            </p>
+            <h2 id="short-story-title">{customProject.shortStory.headline}</h2>
+            <p>{customProject.shortStory.body}</p>
+
+            <div className="case-study-highlight-grid">
+              {customProject.shortStory.highlights.map((highlight) => (
+                <article key={highlight.number}>
+                  <h3>
+                    <span>{highlight.number}</span>
+                    {highlight.title}
+                  </h3>
+                  <p>{highlight.body}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <div className="case-study-content">
+            {customProject.sections.map((section) => (
+              <section
+                key={section.eyebrow}
+                className={`case-study-feature-section${
+                  section.image ? " has-real-image" : ""
+                }`}
+              >
+                <div className="case-study-section-copy">
+                  <p className="case-study-section-eyebrow">{section.eyebrow}</p>
+                  <h2>{section.headline}</h2>
+                  {section.body.map((paragraph, index) => (
+                    <div key={paragraph}>
+                      <p>{paragraph}</p>
+                      {index === 0 && section.bullets ? (
+                        <ul>
+                          {section.bullets.map((bullet) => (
+                            <li key={bullet}>{bullet}</li>
+                          ))}
+                        </ul>
+                      ) : null}
+                    </div>
+                  ))}
+                </div>
+
+                {section.image ? (
+                  <Image
+                    className="case-study-visual-image"
+                    src={section.image}
+                    alt={section.visual}
+                    width={1920}
+                    height={1080}
+                    quality={100}
+                  />
+                ) : (
+                  <div className="case-study-visual-placeholder" aria-label={section.visual}>
+                    <span>Project visual placeholder</span>
+                  </div>
+                )}
+              </section>
+            ))}
+          </div>
+        </article>
+      </main>
+    );
+  }
+
+  const project = getBehanceProjectBySlug(slug);
+
+  if (!project) {
     notFound();
   }
 
@@ -45,73 +172,66 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         </Link>
 
         <header className="case-header">
-          <p className="eyebrow">{caseStudy.category}</p>
-          <h1>{caseStudy.title}</h1>
-          <p>{caseStudy.summary}</p>
+          <p className="eyebrow">Behance Project</p>
+          <h1>{project.title}</h1>
+          <p>
+            Imported from Behance with full module images. Original project link: {" "}
+            <a href={project.url} target="_blank" rel="noreferrer">
+              View on Behance
+            </a>
+          </p>
 
           <dl>
             <div>
-              <dt>Role</dt>
-              <dd>{caseStudy.role}</dd>
+              <dt>Source</dt>
+              <dd>Behance</dd>
             </div>
             <div>
-              <dt>Duration</dt>
-              <dd>{caseStudy.duration}</dd>
+              <dt>Project Slug</dt>
+              <dd>{project.slug}</dd>
             </div>
             <div>
-              <dt>Team</dt>
-              <dd>{caseStudy.team}</dd>
+              <dt>Cover</dt>
+              <dd>Imported</dd>
             </div>
             <div>
-              <dt>Year</dt>
-              <dd>{caseStudy.year}</dd>
+              <dt>Gallery</dt>
+              <dd>{project.moduleCount} images</dd>
             </div>
           </dl>
         </header>
 
-        <section aria-labelledby="impact-title" className="case-section">
-          <h2 id="impact-title">Impact</h2>
-          <ul className="impact-list">
-            {caseStudy.impact.map((metric) => (
-              <li key={metric}>{metric}</li>
-            ))}
-          </ul>
-        </section>
-
-        <section aria-labelledby="problem-title" className="case-section">
-          <h2 id="problem-title">Problem</h2>
-          <p>{caseStudy.problem}</p>
-        </section>
-
-        <section aria-labelledby="constraints-title" className="case-section">
-          <h2 id="constraints-title">Constraints</h2>
-          <ul>
-            {caseStudy.constraints.map((constraint) => (
-              <li key={constraint}>{constraint}</li>
-            ))}
-          </ul>
-        </section>
-
-        <section aria-labelledby="approach-title" className="case-section">
-          <h2 id="approach-title">Approach</h2>
-          <div className="approach-steps">
-            {caseStudy.approach.map((step) => (
-              <article key={step.title}>
-                <h3>{step.title}</h3>
-                <p>{step.detail}</p>
-              </article>
-            ))}
+        <section aria-labelledby="cover-title" className="case-section">
+          <h2 id="cover-title">Cover</h2>
+          <div className="case-cover">
+            <Image
+              src={project.coverImage}
+              alt={`${project.title} cover`}
+              width={1600}
+              height={1200}
+              quality={100}
+              unoptimized
+            />
           </div>
         </section>
 
-        <section aria-labelledby="outcome-title" className="case-section">
-          <h2 id="outcome-title">Outcome</h2>
-          <p>{caseStudy.outcome}</p>
-        </section>
-
-        <section aria-labelledby="reflection-title" className="case-section">
-          <h2 id="reflection-title">Reflection</h2>
-          <p>{caseStudy.reflection}</p>
+        <section aria-labelledby="gallery-title" className="case-section">
+          <h2 id="gallery-title">Full Gallery</h2>
+          <div className="case-gallery">
+            {project.images.map((src, index) => (
+              <figure key={`${project.slug}-${index}`}>
+                <Image
+                  src={src}
+                  alt={`${project.title} image ${index + 1}`}
+                  width={1600}
+                  height={1200}
+                  sizes="(max-width: 900px) 100vw, 900px"
+                  quality={100}
+                  unoptimized
+                />
+              </figure>
+            ))}
+          </div>
         </section>
       </div>
     </main>
